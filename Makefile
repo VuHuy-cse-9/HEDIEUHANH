@@ -1,6 +1,5 @@
-obj-m += get_proc_info.o
+obj-m += test1.o
 all:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
- 
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 clean:
-    make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean

@@ -9,9 +9,10 @@
 
 int iterate_init(void)                    /*    Init Module    */
 {
-    int pid = -1;
-    struct task_struct* task = pid_task( find_vpid(1), PIDTYPE_PID);     
-    printk("[%d] ---------[%s]--------[%d]\n", task->pid, task->comm, task->parent->pid);
+    int pid = 820;
+    struct task_struct* task = pid_task( find_vpid(pid), PIDTYPE_PID);     
+    printk("[%d] ---------[%s]--------[%d]----------[%s]\n", task->pid, task->comm,
+    task->parent->pid, task->parent->comm);
     return 0;
  
 }                /*    End of Init Module    */
