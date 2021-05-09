@@ -10,7 +10,7 @@ struct list_head *list;            /*    Structure needed to iterate through the
 module_param(PID, long, S_IRUSR);
 MODULE_PARM_DESC(PID, "PID of current process");
 
-int iterate_init(int pid)                    /*    Init Module    */
+int iterate_init(void)                    /*    Init Module    */
 {
     printk(KERN_INFO "Input argument pid %ld\n", PID);
     printk(KERN_INFO "%s","LOADING MODULE\n");    /*    good practice to log when loading/removing modules    */
