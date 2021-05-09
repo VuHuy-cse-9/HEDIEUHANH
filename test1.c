@@ -4,10 +4,10 @@
 #include <linux/sched/signal.h>
 #include <linux/sched.h>
  
-struct task_struct* oldestChild;
+struct task_struct* youngest_child;
 struct task_struct *task;        /*    Structure defined in sched.h for tasks/processes    */
-struct task_struct *task_child;        /*    Structure needed to iterate through task children    */
-struct list_head *list;            /*    Structure needed to iterate through the list in each task->children struct    */
+//struct task_struct *task_child;        /*    Structure needed to iterate through task children    */
+//struct list_head *list;            /*    Structure needed to iterate through the list in each task->children struct    */
  
 int iterate_init(void)                    /*    Init Module    */
 {
@@ -15,12 +15,11 @@ int iterate_init(void)                    /*    Init Module    */
      
     for_each_process( task ){            /*    for_each_process() MACRO for iterating through each task in the os located in linux\sched\signal.h    */
         printk(KERN_INFO "\nCURRENT PID: %d PROCESS: %s",task->pid, task->comm);/*    log parent id/executable name/state    */
-	task_child = list_first_entry(&task->children, struct task_struct, sibling);
-	list = &task_child->tasks;
-	oldestChild = list_entry(list->prev, struct task_struct, sibling);
-	printk(KERN_INFO "\nOldest child pid: [%d] and name [%s]\n", oldestChild->pid, oldestChild->comm);
-	//struct task_struct* oldestChild = list_first_entry(&task_child->prev, struct task_struct, sibling);
-       //struct task_struct* oldstTask = list_entry(task->child.prev, struct task_struct, sibling);
+	youngest_child = list_first_entry(&task->children, struct task_struct, sibling);
+	//list = &task_child->tasks;
+	//oldestChild = list_entry(list->prev, struct task_struct, sibling);
+	printk(KERN_INFO "\nYoungest child pid: [%d] and name [%s]\n", youngest_child->pid, 
+youngest_child->comm);
         printk("-----------------------------------------------------");    /*for aesthetics*/
     }    
     return 0;
