@@ -20,7 +20,7 @@ int init_module(void)                    /*    Init Module    */
  
 }                /*    End of Init Module    */
      
-void cleanup_module(void)        /*    Exit Module    */
+void cleanup_exit(void)        /*    Exit Module    */
 {
     printk(KERN_INFO "%s","REMOVING MODULE\n");
  
