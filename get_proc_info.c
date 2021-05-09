@@ -1,5 +1,7 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/init.h>
+#include <linux/sched/signal.h>
 #include <linux/sched.h>
  
  
@@ -13,18 +15,17 @@ MODULE_PARM_DESC(PID, "PID of current process");
 int iterate_init(void)                    /*    Init Module    */
 {
     printk(KERN_INFO "Input argument pid %ld\n", PID);
-    printk(KERN_INFO "%s","LOADING MODULE\n");    /*    good practice to log when loading/removing modules    */
+    //printk(KERN_INFO "%s","LOADING MODULE\n");    /*    good practice to log when loading/removing modules    */
      
-    for_each_process( task ){            /*    for_each_process() MACRO for iterating through each task in the os located in linux\sched\signal.h    */
-        printk(KERN_INFO "\nPARENT PID: %d PROCESS: %s STATE: %ld",task->pid, task->comm, task->state);/*    log parent id/executable name/state    */
-        task->children
-        list_for_each(list, &task->children){                        /*    list_for_each MACRO to iterate through task->children    */
-            task_child = list_entry( list, struct task_struct, sibling );    /*    using list_entry to declare all vars in task_child struct    */
-            printk(KERN_INFO "\nCHILD OF %s[%d] PID: %d PROCESS: %s STATE: %ld",task->comm, task->pid, /*    log child of and child pid/name/state    */
-                task_child->pid, task_child->comm, task_child->state);
-        }
-        printk("-----------------------------------------------------");    /*for aesthetics*/
-    }    
+    // for_each_process( task ){            /*    for_each_process() MACRO for iterating through each task in the os located in linux\sched\signal.h    */
+    //     printk(KERN_INFO "\nPARENT PID: %d PROCESS: %s STATE: %ld",task->pid, task->comm, task->state);/*    log parent id/executable name/state    */
+    //     list_for_each(list, &task->children){                        /*    list_for_each MACRO to iterate through task->children    */
+    //         task_child = list_entry( list, struct task_struct, sibling );    /*    using list_entry to declare all vars in task_child struct    */
+    //         printk(KERN_INFO "\nCHILD OF %s[%d] PID: %d PROCESS: %s STATE: %ld",task->comm, task->pid, /*    log child of and child pid/name/state    */
+    //             task_child->pid, task_child->comm, task_child->state);
+    //     }
+    //     printk("-----------------------------------------------------");    /*for aesthetics*/
+    // }    
     return 0;
  
 }                /*    End of Init Module    */
